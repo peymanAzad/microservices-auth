@@ -1,6 +1,6 @@
 # microservices-auth
 microservices authentication system with graphql gateway, mailer service and nextjs client using rabbitMQ for messaging
-## stack technologies
+## tech stack
 
 - node.js
 - typescript
