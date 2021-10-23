@@ -1,0 +1,9 @@
+mutation RevokeToken {
+	revokeRefreshTokens {
+		result
+		errors {
+			field
+			message
+		}
+	}
+}

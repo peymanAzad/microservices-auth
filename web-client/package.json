@@ -1,0 +1,43 @@
+{
+  "name": "nextjs-with-typescript",
+  "version": "5.0.0",
+  "private": true,
+  "dependencies": {
+    "@apollo/client": "^3.4.16",
+    "@emotion/cache": "latest",
+    "@emotion/react": "latest",
+    "@emotion/server": "latest",
+    "@emotion/styled": "latest",
+    "@mui/icons-material": "^5.0.4",
+    "@mui/material": "latest",
+    "apollo-link-token-refresh": "^0.3.2",
+    "clsx": "latest",
+    "cookie": "^0.4.1",
+    "formik": "^2.2.9",
+    "graphql": "^15.6.1",
+    "jwt-decode": "^3.1.2",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "yup": "^0.32.11"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest",
+    "gen": "graphql-codegen --config codegen.yml"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "2.2.1",
+    "@graphql-codegen/introspection": "2.1.0",
+    "@graphql-codegen/typescript": "2.2.4",
+    "@graphql-codegen/typescript-operations": "2.1.8",
+    "@graphql-codegen/typescript-react-apollo": "3.1.6",
+    "@types/cookie": "^0.4.1",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "typescript": "latest"
+  }
+}

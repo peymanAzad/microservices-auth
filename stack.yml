@@ -1,0 +1,65 @@
+version: "3.2"
+services:
+  redis:
+    image: redis
+    networks:
+      - auth
+  rebbitmq:
+    image: rabbitmq:3.9-management
+    networks:
+      - auth
+    ports:
+      - "15672:15672"
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_pass
+      POSTGRES_DB: reddit2
+    secrets:
+      - postgres_pass
+    networks:
+      - auth
+    deploy:
+      replicas: 1
+  auth-service:
+    image: micro-auth:1
+    environment:
+      DATABASE_PASS_FILE: /run/secrets/postgres_pass
+      RABBITMQ_CONNECTION: amqp://rebbitmq:5672
+      REDISS_CONNECTION: redis:6379
+    networks:
+      - auth
+    secrets:
+      - postgres_pass
+  gateway-service:
+    image: micro-gateway:1
+    environment:
+      CORS_CLIENT_HOST: client-web:3000
+      RABBITMQ_CONNECTION: amqp://rebbitmq:5672
+    networks:
+      - auth
+      - web
+  mail-service:
+    image: micro-mailer:1
+    environment:
+      CORS_CLIENT_HOST: client-web:3000
+      RABBITMQ_CONNECTION: amqp://rebbitmq:5672
+      CHANGE_PASSWORD_URL: client-web:3000/forget_password
+    networks:
+      - auth
+  client-web:
+    image: client-web:1
+    networks: -web
+    ports:
+      - "3000:3000"
+
+networks:
+  auth:
+    driver: overlay
+  web:
+    driver: overlay
+
+secrets:
+  postgres_pass:
+    external: true
