@@ -4,9 +4,7 @@ class amqpManager {
 	private channel: amqp.Channel | null;
 	private conn: amqp.Connection | null;
 	private async initConn() {
-		this.conn = await amqp.connect(
-			process.env.AMQP_COONECTION || "amqp://localhost"
-		);
+		this.conn = await amqp.connect(process.env.AMQP_COONECTION!);
 		this.conn.on("error", (err: any) => {
 			this.channel = null;
 			throw Error(err.message);

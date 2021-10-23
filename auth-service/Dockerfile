@@ -19,7 +19,8 @@ WORKDIR /src
 COPY --from=builder /src/node_modules ./node_modules
 COPY --from=builder /src/dist ./dist
 COPY --from=builder /src/.env ./.env
-COPY --from=builder /src/ormconfig.json ./ormconfig.json
+COPY --from=builder /src/.env.example ./.env.example
+COPY --from=builder /src/ormconfig.js ./ormconfig.js
 COPY --from=builder /src/package.json ./package.json
 
 EXPOSE 4000
